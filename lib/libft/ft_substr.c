@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehabes <ehabes@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tnakajo <tnakajo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/22 00:02:16 by ehabes            #+#    #+#             */
-/*   Updated: 2024/10/22 00:25:43 by ehabes           ###   ########.fr       */
+/*   Created: 2022/12/12 16:45:18 by tnakajo           #+#    #+#             */
+/*   Updated: 2022/12/23 15:56:44 by tnakajo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,84 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char	*sub;
-	size_t	s_len;
+	char	*dst;
+	size_t	i;
 
-	s_len = ft_strlen(s);
-	if (start >= s_len)
-		return (ft_strdup(""));
-	if (start + len > s_len)
-		len = s_len - start;
-	sub = (char *)malloc(len + 1);
-	if (!sub)
+	if (!s)
 		return (NULL);
-	ft_strlcpy(sub, s + start, len + 1);
-	return (sub);
+	if (ft_strlen(s) < start)
+	{
+		dst = malloc(sizeof(char));
+		if (!dst)
+			return (NULL);
+		dst[0] = '\0';
+		return (dst);
+	}
+	if (start + len > ft_strlen(s))
+		len = ft_strlen(s) - start;
+	dst = malloc(sizeof(char) * (len + 1));
+	if (!dst)
+		return (NULL);
+	i = 0;
+	while (i++ < len)
+		dst[i - 1] = s[start + i - 1];
+	dst[i - 1] = '\0';
+	return (dst);
 }
+
+/* char	*ft_substr_2(char const *s, unsigned int start, size_t len)
+{
+	char	*str;
+	size_t	i;
+	size_t	j;
+
+	str = (char *)malloc(sizeof(char) * (len + 1));
+	if (!str)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (s[i] && s[start + i])
+	{
+		if (i < len)
+		{
+			str[i] = s[start + i];
+			j++;
+		}
+		i++;
+	}
+	if (i == 0 || len + start < i)
+		str[j] = '\0';
+	return (str);
+} */
+
+/* int main (void)
+{
+    char			str[] = "hello ifmmp jgnnq";
+    // char			str[] = "hello ifmmp";
+    unsigned int	start =  2222;
+    unsigned int	len =  10;
+	char			*bullshit;
+    char			*ptr = ft_substr(str, start, len);
+    // char			*ptr = ft_substr(str, 400, 20);
+	int				i;
+
+	// printf("%s\n", ptr);
+	// bullshit = (char *)&ptr[30];
+	// bullshit = "FULL BULLSHIT";
+	// i = 0;
+	// if (ptr)
+	// {
+		while (ptr[i])
+		{
+			printf("%c\n", ptr[i]);
+			i++;
+		}	
+	// }
+	// else
+	// 	printf("%s\n", "nothing :P");
+
+    free(ptr);
+
+	(void)bullshit;
+	return (0);
+} */

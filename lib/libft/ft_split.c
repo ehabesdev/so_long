@@ -3,94 +3,203 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehabes <ehabes@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tnakajo <tnakajo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/27 18:18:58 by ehabes            #+#    #+#             */
-/*   Updated: 2024/10/28 21:25:36 by ehabes           ###   ########.fr       */
+/*   Created: 2022/12/20 21:49:45 by tnakajo           #+#    #+#             */
+/*   Updated: 2022/12/24 13:05:58 by tnakajo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_count_words(const char *str, char delimiter)
+static int	ft_wdcount(const char *str, char c)
 {
-	int	i;
-	int	word_count;
+	int	trigger;
+	int	count;
 
-	i = 0;
-	word_count = 0;
-	while (str[i])
+	trigger = 0;
+	count = 0;
+	while (*str)
 	{
-		while (str[i] && str[i] == delimiter)
-			i++;
-		if (str[i])
-			word_count++;
-		while (str[i] && str[i] != delimiter)
-			i++;
+		if (*str != c && trigger == 0)
+		{
+			trigger = 1;
+			count++;
+		}
+		else if (*str == c)
+			trigger = 0;
+		str++;
 	}
-	return (word_count);
+	return (count);
 }
 
-static int	ft_word_length(const char *str, char delimiter)
+static int	ft_word_size(const char *s, char c, int i)
 {
-	int	i;
+	int	size;
 
-	i = 0;
-	while (str[i] && str[i] != delimiter)
+	size = 0;
+	while (s[i] != c && s[i])
 	{
 		i++;
+		size++;
 	}
-	return (i);
+	return (size);
 }
 
-static char	*ft_extract_word(const char *str, char delimiter)
+static void	ft_free(char **str, int j)
 {
-	size_t	len;
-	char	*word;
-
-	len = ft_word_length(str, delimiter);
-	word = (char *)malloc((len + 1) * sizeof(char));
-	ft_strlcpy(word, str, len + 1);
-	return (word);
-}
-
-static char	**fd_memory_allocation_words(char **word_array, const char *s,
-		int word_count, char delimiter)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (j < word_count && s[i])
+	while (j)
 	{
-		while (s[i] && s[i] == delimiter)
-			i++;
-		if (s[i])
-		{
-			word_array[j] = ft_extract_word((s + i), delimiter);
-			j++;
-		}
-		while (s[i] && s[i] != delimiter)
-		{
-			i++;
-		}
+		free(str[j]);
+		j--;
 	}
-	word_array[j] = 0;
-	return (word_array);
+	free(str);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**array;
-	int		count;
+	int		i;
+	int		j;
+	int		word;
+	int		size;
+	char	**str;
 
-	if (!s)
+	i = 0;
+	j = 0;
+	word = ft_wdcount(s, c);
+	str = (char **)malloc((word + 1) * sizeof(char *));
+	if (!str)
 		return (NULL);
-	count = ft_count_words(s, c);
-	array = (char **)malloc((count + 1) * sizeof(char *));
-	if (!array)
-		return (NULL);
-	array = fd_memory_allocation_words(array, s, count, c);
-	return (array);
+	while (j < word)
+	{
+		while (s[i] == c)
+			i++;
+		size = ft_word_size(s, c, i);
+		str[j] = ft_substr(s, i, size);
+		if (!str[j])
+			ft_free(str, j);
+		i = size + i;
+		j++;
+	}
+	str[j] = NULL;
+	return (str);
 }
+
+/* size_t	ft_strlen(const char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
+
+static int	ft_delimitercount(const char *str, char c)
+{
+	int	i;
+	int	j;
+	int	k;
+
+	i = 0;
+	j = 1;
+	k = 0;
+	while (str[i])
+	{
+		if (str[i] != c && k == 0)
+		{
+			k = 1;
+			j++;
+		}
+		else if (str[i] == c)
+			k = 0;
+		i++;
+	}
+	return (j);
+}
+
+static char	*ft_tmpwords(const char *str, int start, int finish)
+{
+	char	*word;
+	int		i;
+
+	i = 0;
+	word = (char *)malloc(sizeof(char) * (finish - start + 1));
+	while (start < finish)
+		word[i++] = str[start++];
+	word[i] = '\0';
+	return (word);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	size_t	i;
+	size_t	j;
+	int		k;
+	char	**split;
+
+	split = (char **)malloc(sizeof(char *) * ft_delimitercount(s, c));
+	if (!s || !split)
+		return (NULL);
+	i = 0;
+	j = 0;
+	k = -1;
+	// while (s[i])
+	while (i < ft_strlen(s) + 1)
+	{
+		if (s[i] != c && k < 0)
+			k = i;
+		else if ((s[i] == c || i == ft_strlen(s)) && k >= 0)
+		{
+			split[j++] = ft_tmpwords(s, k, i);	
+			k = -1;
+		}
+		i++;
+	}
+	split[j] = NULL; // why it is needed?
+	// should I use free function?
+	return (split);
+} */
+
+/* char	**ft_split(char const *s, char c)
+{
+	int		i;
+	int		j;
+	i = 0;
+	j = 0;
+	k = 0;
+	split = (char **)malloc(sizeof(char *) * (ft_strlen(s) + 1));
+	if (!split)
+		return (NULL);
+	printf("hey\n");
+	while (s[i])
+	{
+		if (s[i] == c)
+		{
+			j++;
+			k = 0;
+		}
+		split[j][k] = s[i];
+		i++;
+		k++;
+	}
+	printf("hey almost\n");
+	return (split);
+} */
+
+/* int	main(void)
+{
+	char	*s1 = "  hello f abc    def";
+	char	c = ' ';
+	char	**ptr = ft_split(s1, c);
+	int		i;
+
+	i = 0;
+	while (ptr[i])
+	{
+		printf("%s\n", ptr[i]);
+		i++;
+	}
+	free(ptr);
+	return (0);
+} */

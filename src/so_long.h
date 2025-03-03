@@ -35,7 +35,7 @@ typedef struct s_map {
 } t_map;
 
 t_map *parse_map(char *filename);
-t_map *read_map_lines(int fd, t_map *map);
+int read_map_lines(int fd, t_map *map, int width, int height);
 int process_map_line(t_map *map, char *line, int y);
 t_map *check_map_validity(t_map *map);
 t_map *check_map_walls(t_map *map);
@@ -44,6 +44,7 @@ void init_map(t_map *map);
 void load_xpm_images(t_map *map);
 void render_map(t_map *map);
 int handle_input(int keycode, t_map *map);
+int get_map_dimensions(int fd, int *width, int *height);
 void update_player_position(t_map *map, int new_x, int new_y);
 
 void free_map(t_map *map);

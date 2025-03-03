@@ -3,23 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehabes <ehabes@student.42kocaeli.com.tr    +#+  +:+       +#+        */
+/*   By: tnakajo <tnakajo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/13 15:21:44 by ehabes            #+#    #+#             */
-/*   Updated: 2024/10/20 18:17:27 by ehabes           ###   ########.fr       */
+/*   Created: 2022/11/29 12:14:29 by tnakajo           #+#    #+#             */
+/*   Updated: 2022/12/20 21:15:27 by tnakajo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(char *s)
+size_t	ft_strlen(const char *s)
 {
 	size_t	i;
 
 	i = 0;
-	while (*s++)
-	{
+	while (s[i])
 		i++;
-	}
 	return (i);
 }
+
+/*
+void	main(void)
+{
+	char	*c;
+
+	printf("\n---------------strlen---------------\n\n");
+	c = "ZZZ 		 F\nF";
+	printf("uppercase strlen: %d\n", strlen(c));
+	printf("uppercase ft_strlen: %d\n", ft_strlen(c));
+	c = " q	aaaa	s";
+	printf("lowercase strlen: %d\n", strlen(c));
+	printf("lowercase ft_strlen: %d\n", ft_strlen(c));
+	c = "	0";
+	printf("strlen: %d\n", strlen(c));
+	printf("ft_strlen: %d\n", ft_strlen(c));
+	c = "";
+	printf("strlen: %d\n", strlen(c));
+	printf("ft_strlen: %d\n", ft_strlen(c));
+	printf("\n-------------------------------------\n\n");
+}
+*/

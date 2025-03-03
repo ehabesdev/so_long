@@ -3,27 +3,59 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehabes <ehabes@student.42kocaeli.com.tr    +#+  +:+       +#+        */
+/*   By: tnakajo <tnakajo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/20 19:44:24 by ehabes            #+#    #+#             */
-/*   Updated: 2024/10/20 20:28:38 by ehabes           ###   ########.fr       */
+/*   Created: 2022/12/02 17:46:41 by tnakajo           #+#    #+#             */
+/*   Updated: 2022/12/12 22:25:37 by tnakajo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+/* #include <bsd/string.h> */
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
-	size_t	s_len;
+	size_t	i;
+	size_t	j;
 
-	s_len = ft_strlen(src);
-	if (size == 0)
-		return (s_len);
-	while (size > 1 && *src)
+	i = 0;
+	j = 0;
+	while (src[i])
 	{
-		*dst++ = *src++;
-		size--;
+		if (i + 1 < size)
+		{
+			dst[i] = src[i];
+			j++;
+		}
+		i++;
 	}
-	*dst = '\0';
-	return (s_len);
+	if (i == 0 || j < size)
+		dst[j] = '\0';
+	return (i);
 }
+
+/*
+ * to test
+ * gcc ft_strlcpy.c -lbsd && ./a.out
+ */
+/* int	main(void)
+{
+	int	i;
+	char	s1[100] = "Hello, world!";
+	char	s2[100] = "Hello, world!";
+
+	i = 15;
+	// printf("%ld\n", ft_strlcpy(s1, s1 + 4, 20));
+	// printf("%s\n", s1);
+	// printf("%ld\n", strlcpy(s2, s2 + 4, 20));
+	// printf("%s\n", s2);
+	printf("%ld\n", ft_strlcpy(s1, "", i));
+	printf("%s\n", s1);
+	printf("%ld\n", strlcpy(s2, "", i));
+	printf("%s\n", s2);
+	printf("%ld\n", ft_strlcpy(s1, "have a nice weekend", i));
+	printf("%s\n", s1);
+	printf("%ld\n", strlcpy(s2, "have a nice weekend", i));
+	printf("%s\n", s2);
+	return (0);
+} */

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehabes <ehabes@student.42kocaeli.com.tr    +#+  +:+       +#+        */
+/*   By: tnakajo <tnakajo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/30 14:15:50 by ehabes            #+#    #+#             */
-/*   Updated: 2024/12/30 14:23:42 by ehabes           ###   ########.fr       */
+/*   Created: 2023/01/16 19:09:35 by tnakajo           #+#    #+#             */
+/*   Updated: 2023/01/17 22:12:36 by tnakajo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,21 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
-# endif
+# include <fcntl.h>
 
 char	*get_next_line(int fd);
-char	*ft_strjoin(char *s1, char *s2);
-char	*ft_strchr(char *s, int c);
-size_t	ft_strlen(char *s);
+char	*get_next_line_sub(char **str_line, char **str_buff);
+char	*get_next_line_with_n(char **str_line, char **str_buff, int fb);
+void	ft_str_free(char **str);
+int		ft_str_len(char *str);
+int		ft_str_char(char *str, int c);
+char	*ft_str_dup_b(char *str, int c);
+char	*ft_str_dup_a(char *str, int c);
+char	*ft_str_cat(char *str_line, char *str_buff);
+void	ft_str_cat_sub(char *dest, char *src, int start);
 
-char	*read_function(int fd, char *str);
-char	*ft_getline(char *buffer);
-char	*ft_getrest(char *buffer);
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 10000000
+# endif
 
 #endif

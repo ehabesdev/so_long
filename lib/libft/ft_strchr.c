@@ -3,29 +3,76 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehabes <ehabes@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tnakajo <tnakajo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/13 12:48:33 by ehabes            #+#    #+#             */
-/*   Updated: 2024/10/28 21:43:05 by ehabes           ###   ########.fr       */
+/*   Created: 2022/11/30 12:23:45 by tnakajo           #+#    #+#             */
+/*   Updated: 2022/12/22 21:31:57 by tnakajo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(char *s, int c)
+char	*ft_strchr(const char *s, int c)
 {
-	int	i;
+	unsigned int	i;
 
 	i = 0;
-	if (!s)
-		return (0);
-	if (c == '\0')
-		return ((char *)&s[ft_strlen(s)]);
-	while (s[i] != '\0')
+	while (s[i])
 	{
-		if (s[i] == (char) c)
+		if (s[i] == (char)c)
 			return ((char *)&s[i]);
 		i++;
 	}
-	return (0);
+	if ((char)c == s[i])
+		return ((char *)&s[i]);
+	return (NULL);
 }
+
+/* char	*ft_strchr_2(const char *s, int c)
+{
+	while (*s != '\0')
+	{
+		if ((char)*s == (char)c)
+			return ((char *)s);
+		s++;
+	}
+	if (c == 0)
+		return ((char *)s);
+	return (NULL);
+}
+ */
+/* char	*ft_strchr_3(const char *s, int c)
+{
+	int	sign;
+
+	sign = 0;
+	while (s[sign] != '\0')
+	{
+		if (s[sign] == c)
+			return ((char *)&s[sign]);
+		sign++;
+	}
+	if (c == 0)
+		return ((char *)&s[sign]);
+	return (NULL);
+} */
+
+/* void	main(void)
+{
+	char	*c;
+	char	ch;
+
+	printf("\n---------------strchr---------------\n\n");
+	c = "http://www.tutorialspoint.com";
+	// ch = '.';
+	ch = '\0';
+	printf("strchr:%s;\n", strchr(c, ch));
+	printf("ft_strchr:%s;\n", ft_strchr(c, ch));
+	c = "---.3-2 e";
+	printf("lowercase strchr:%s;\n", strchr(c, ch));
+	printf("lowercase ft_strchr:%s;\n", ft_strchr(c, ch));
+	c = "-";
+	printf("not digit case strchr:%s;\n", strchr(c, ch));
+	printf("not digit case ft_strchr:%s;\n", ft_strchr(c, ch));
+	printf("\n-------------------------------------\n\n");
+} */

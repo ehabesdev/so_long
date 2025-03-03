@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehabes <ehabes@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tnakajo <tnakajo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/26 17:36:07 by ehabes            #+#    #+#             */
-/*   Updated: 2024/10/26 18:37:10 by ehabes           ###   ########.fr       */
+/*   Created: 2022/12/21 17:11:57 by tnakajo           #+#    #+#             */
+/*   Updated: 2022/12/21 20:30:50 by tnakajo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,16 @@
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	char	*str;
-	size_t	i;
-	size_t	len;
+	unsigned int	i;
+	char			*str;
 
-	if (!s || !f)
-		return (NULL);
-	len = ft_strlen(s);
-	str = (char *)malloc(len + 1);
-	if (!str)
+	if (!s)
 		return (NULL);
 	i = 0;
-	while (i < len)
+	str = (char *)malloc(sizeof(char) * (ft_strlen(s)) + 1);
+	if (str == NULL)
+		return (NULL);
+	while (s[i] != '\0')
 	{
 		str[i] = f(i, s[i]);
 		i++;
@@ -33,3 +31,18 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	str[i] = '\0';
 	return (str);
 }
+
+/* char ft_ft(unsigned int c, char s)
+	char	ch;
+	ch = ft_toupper(s);
+	return (ch);
+}
+
+int main(void)
+{
+	char *str = "hello, world!";
+	char *modified_str = ft_strmapi(str, ft_ft);
+	printf("Original string: %s\nModified string: %s\n", str, modified_str);
+	free(modified_str);
+	return 0;
+} */
