@@ -3,49 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnakajo <tnakajo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ehabes <ehabes@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/05 14:32:19 by tnakajo           #+#    #+#             */
-/*   Updated: 2022/12/21 21:01:04 by tnakajo          ###   ########.fr       */
+/*   Created: 2024/10/21 01:46:32 by ehabes            #+#    #+#             */
+/*   Updated: 2024/10/21 02:06:55 by ehabes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_calloc(size_t nmemb, size_t size)
+void	*ft_calloc(size_t num, size_t size)
 {
-	void	*ptr;
+	size_t	t_size;
+	void	*buff;
 
-	ptr = malloc(nmemb * size);
-	if (ptr == NULL)
-		return (ptr);
-	ft_bzero(ptr, nmemb * size);
-	return (ptr);
+	t_size = num * size;
+	buff = malloc(t_size);
+	if (!buff)
+		return (NULL);
+	ft_memset(buff, '\0', t_size);
+	return (buff);
 }
-
-/*
-int	main(void)
-{
-    // Allocate memory for 10 integers
-    int *ptr = (int*) ft_calloc(10, sizeof(int));
-    if (ptr == NULL) {
-        // Handle error
-        printf("Error\n");
-    }
-    // ptr[0] = 10;
-    // ptr[1] = 20;
-
-    // Check that the allocated memory is initialized to zero
-    for (int i = 0; i < 10; i++) {
-        if (ptr[i] != 0) {
-            printf("Error: allocated memory is not initialized to zero\n");
-            return 1;
-        }
-    }
-    printf("^^^^finished\n");
-    // Free the memory when it is no longer needed
-    free(ptr);
-
-    return (0);
-}
-*/

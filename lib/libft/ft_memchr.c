@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnakajo <tnakajo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ehabes <ehabes@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/30 16:44:32 by tnakajo           #+#    #+#             */
-/*   Updated: 2022/12/07 20:03:38 by tnakajo          ###   ########.fr       */
+/*   Created: 2024/10/14 02:03:20 by ehabes            #+#    #+#             */
+/*   Updated: 2024/10/21 22:58:32 by ehabes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,36 +14,21 @@
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {
-	unsigned char	*str;
-	unsigned int	sign;
+	size_t			i;
+	unsigned char	*ptr;
+	unsigned char	*res;
 
-	str = (unsigned char *)s;
-	sign = 0;
-	while (sign < n)
+	res = NULL;
+	ptr = (unsigned char *)s;
+	i = 0;
+	while (i < n)
 	{
-		if (str[sign] == (unsigned char)c)
-			return ((char *)&str[sign]);
-		sign++;
+		if (ptr[i] == (unsigned char)c)
+		{
+			res = &ptr[i];
+			break ;
+		}
+		i++;
 	}
-	return (0);
+	return (res);
 }
-
-/*
-void	main(void)
-{
-	char	str[] = "http://www.tutorialspoint.com";
-	char	ch = '.';
-	char	*ret;
-
-	printf("\n---------------memchr---------------\n\n");
-	printf("String after |%c| is - |%s|\n", ch, memchr(str, ch, 9));
-	printf("String after |%c| is - |%s|\n", ch, ft_memchr(str, ch, 9));
-	printf("String after |%c| is - |%s|\n", ch, memchr(str, ch, 10));
-	printf("String after |%c| is - |%s|\n", ch, ft_memchr(str, ch, 10));
-	printf("String after |%c| is - |%s|\n", ch, memchr(str, ch, 11));
-	printf("String after |%c| is - |%s|\n", ch, ft_memchr(str, ch, 11));
-	printf("String after |%c| is - |%s|\n", ch, memchr(str, ch, 14));
-	printf("String after |%c| is - |%s|\n", ch, ft_memchr(str, ch, 14));
-	printf("\n-------------------------------------\n\n");
-}
-*/

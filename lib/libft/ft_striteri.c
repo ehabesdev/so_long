@@ -3,39 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnakajo <tnakajo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ehabes <ehabes@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/21 19:41:15 by tnakajo           #+#    #+#             */
-/*   Updated: 2022/12/21 20:08:23 by tnakajo          ###   ########.fr       */
+/*   Created: 2024/10/26 18:35:26 by ehabes            #+#    #+#             */
+/*   Updated: 2024/10/26 19:00:33 by ehabes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_striteri(char *s, void (*f)(unsigned int, char *))
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	unsigned int	i;
+	size_t	len;
+	size_t	i;
 
 	if (!s || !f)
 		return ;
+	len = ft_strlen(s);
 	i = 0;
-	while (s[i] != '\0')
+	while (i < len)
 	{
-		f(i, s + i);
+		f(i, &s[i]);
 		i++;
 	}
 }
-
-/* void my_func(unsigned int i, char *str)
-{
-	printf("My inner function: index = %d and the string is %s\n", i, str);
-}
-
-int main()
-{
-	char str[10] = "Hello.";
-	printf("The result is %s\n", str);
-	ft_striteri(str, my_func);
-	printf("The result is %s\n", str);
-	return 0;
-} */

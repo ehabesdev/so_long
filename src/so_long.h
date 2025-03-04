@@ -40,8 +40,8 @@ int process_map_line(t_map *map, char *line, int y);
 t_map *check_map_validity(t_map *map);
 t_map *check_map_walls(t_map *map);
 
-void init_map(t_map *map);
-void load_xpm_images(t_map *map);
+int init_map(t_map *map);
+int load_xpm_images(t_map *map);
 void render_map(t_map *map);
 int handle_input(int keycode, t_map *map);
 int get_map_dimensions(int fd, int *width, int *height);

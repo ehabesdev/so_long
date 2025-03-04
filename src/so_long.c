@@ -3,32 +3,32 @@
 // Ana fonksiyon. Programın başlangıç noktasıdır.
 // Argümanları kontrol eder, haritayı ayrıştırır, başlatır, render eder,
 // olay döngüsünü başlatır ve sonunda haritayı serbest bırakır.
+
 int main(int argc, char **argv) {
-    // Argüman sayısını kontrol et.
+    t_map *map;
+
     if (argc != 2) {
         ft_printf("Hata: Yanlış argüman sayısı.\n");
         return (1);
     }
 
-    // Haritayı verilen dosyadan ayrıştır.
-    t_map *map = parse_map(argv[1]);
-    // Harita ayrıştırma başarısız olduysa hata mesajı göster ve çık.
+    map = parse_map(argv[1]);
     if (!map) {
         ft_printf("Hata: Harita ayrıştırma başarısız.\n");
         return (1);
     }
 
-    // Haritayı başlat (mlx, resimler, vb.).
-    init_map(map);
-    // Haritayı ekrana çiz.
+    if (!init_map(map)) {
+        ft_printf("Harita başlatılamadı.\n");
+        free_map(map);
+        return (1);
+    }
+
     render_map(map);
 
-    // Tuş girişlerini dinle ve handle_input fonksiyonunu çağır.
     mlx_hook(map->win_ptr, 2, 1L<<0, handle_input, map);
-    // MLX olay döngüsünü başlat.
     mlx_loop(map->mlx_ptr);
 
-    // Haritayı serbest bırak.
     free_map(map);
     return (0);
 }

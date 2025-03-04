@@ -3,53 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnakajo <tnakajo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ehabes <ehabes@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/29 12:15:54 by tnakajo           #+#    #+#             */
-/*   Updated: 2022/12/07 16:20:03 by tnakajo          ###   ########.fr       */
+/*   Created: 2024/10/21 00:47:52 by ehabes            #+#    #+#             */
+/*   Updated: 2024/10/21 01:10:02 by ehabes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char *nptr)
+int	ft_atoi(const char *str)
 {
-	int	i;
-	int	sign;
-	int	number;
+	int	head;
+	int	res;
 
-	i = 0;
-	sign = 1;
-	number = 0;
-	while (nptr[i] == 32 || (9 <= nptr[i] && nptr[i] <= 13))
-		i++;
-	if (nptr[i] == 43 || nptr[i] == 45)
+	res = 0;
+	head = 1;
+	while (*str == ' ' || (*str > 8 && *str < 14))
+		str++;
+	if (*str == '-' || *str == '+')
 	{
-		if (nptr[i] == 45)
-			sign = -1;
-		i++;
+		if (*str == '-')
+		{
+			head = -1;
+		}
+		str++;
 	}
-	while (48 <= nptr[i] && nptr[i] <= 57)
+	while (ft_isdigit(*str))
 	{
-		number = number * 10 + (nptr[i] - 48);
-		i++;
+		res = res * 10 + (*str - 48);
+		str++;
 	}
-	return (number * sign);
+	return (res * head);
 }
-
-/* void	main(void)
-{
-	char	*c;
-
-	printf("\n---------------atoi---------------\n\n");
-	c = "		123-42";
-	printf("uppercase atoi: %d\n", atoi(c));
-	printf("uppercase ft_atoi: %d\n", ft_atoi(c));
-	c = "---3-2 e";
-	printf("lowercase atoi: %d\n", atoi(c));
-	printf("lowercase ft_atoi: %d\n", ft_atoi(c));
-	c = "+2";
-	printf("not digit case atoi: %d\n", atoi(c));
-	printf("not digit case ft_atoi: %d\n", ft_atoi(c));
-	printf("\n-------------------------------------\n\n");
-} */

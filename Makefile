@@ -28,6 +28,9 @@ MLX_LIB = $(MLX_DIR)/libmlx.a
 all: $(NAME)
 
 $(NAME): $(OBJ_FILES) $(MLX_LIB) $(LIB_DIR_L)/libft.a $(LIB_DIR_P)/libftprintf.a
+	if [ ! -f $(MLX_LIB) ]; then echo "MLX kütüphanesi bulunamadı!"; exit 1; fi
+	if [ ! -f $(LIB_DIR_L)/libft.a ]; then echo "libft kütüphanesi bulunamadı!"; exit 1; fi
+	if [ ! -f $(LIB_DIR_P)/libftprintf.a ]; then echo "libftprintf kütüphanesi bulunamadı!"; exit 1; fi
 	$(CC) $(CFLAGS) $(OBJ_FILES) -L$(MLX_DIR) -lmlx -lX11 -lXext -L$(LIB_DIR_L) -lft -L$(LIB_DIR_P) -lftprintf -o $(NAME)
 
 $(MLX_LIB):
