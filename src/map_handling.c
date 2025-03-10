@@ -66,7 +66,7 @@ static int perform_map_checks(t_map *map, int fd) {
 
 int map_check(t_map *map, char *map_path)
 {
-    int fd; // Dosya tanımlayıcısı
+    int fd;
 
     // Dosyayı aç ve temel kontrolleri yap
     if (!open_and_check_map(map, map_path, &fd))
@@ -75,16 +75,15 @@ int map_check(t_map *map, char *map_path)
     // Haritayı oku
     if (!read_map(fd, map))
     {
-        close(fd); // Okuma başarısız olursa dosyayı kapat
-        free_map(map); // Belleği temizle
-        return (0); // Hata döndür
+        close(fd);
+        free_map(map);
+        return (0);
     }
 
      //Duvar,P,E,C kontrolleri.
     if(!perform_map_checks(map, fd))
         return(0);
-
-    return (1); // Tüm kontroller başarılı
+    return (1);
 }
 
 int check_valid_path(t_map *map)
