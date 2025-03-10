@@ -1,9 +1,9 @@
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-#include <stdlib.h>     // Standart kütüphane (malloc, free, exit vb. için)
-#include <fcntl.h>      // open, close için gerekli
-#include <unistd.h>     // read, write için gerekli
+#include <stdlib.h>
+#include <fcntl.h>
+#include <unistd.h>
 
 // 42 Kütüphaneleri
 #include "../libs/libft/libft.h"                // libft
