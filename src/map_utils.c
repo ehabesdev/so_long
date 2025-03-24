@@ -10,7 +10,6 @@ int is_valid_char(char c)
     return (1);
 }
 
-
 int process_line(t_map *map, char *line)
 {
     int col;

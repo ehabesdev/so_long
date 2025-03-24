@@ -15,11 +15,11 @@
 # define TILE_SIZE 64
 
 // -keycodelar-
-# define KEY_W 17
-# define KEY_A 0
-# define KEY_S 1
-# define KEY_D 2
-# define KEY_ESC 53
+#define KEY_ESC 0xff1b
+#define KEY_W 0x77
+#define KEY_A 0x61
+#define KEY_S 0x73
+#define KEY_D 0x64
 
 // Yapılar (Structures)
 typedef struct s_map
@@ -55,13 +55,13 @@ typedef struct s_game {
     t_img       exit;          // Çıkış görseli
     int         player_x;      // Oyuncunun x koordinatı (kare cinsinden)
     int         player_y;      // Oyuncunun y koordinatı (kare cinsinden)
+    int         moves;         // Oyuncunun hareketi (kare cinsinden)
 }   t_game;
 
 // Fonksiyon prototipleri
 
 // map_handling.c
 int  map_check(t_map *map, char *map_path);
-int check_valid_path(t_map *map);
 
 // map_reading.c
 int  read_map(int fd, t_map *map);
@@ -76,14 +76,18 @@ int is_valid_char(char c);
 int process_line(t_map *map, char *line);
 
 // game.c
-void error_handler(char *message);
 int key_hook(int keycode, t_game *game);
 int exit_game(t_game *game);
+int move_player(t_game *game, int new_x, int new_y);
 
 // graphics.c
 int  init_graphics(t_game *game);
 int  load_images(t_game *game);
 int  draw_map(t_game *game);
-int  render_frame(t_game *game);
+
+//map_checks.c
+int is_valid_move(t_map *map, int new_x, int new_y);
+void error_handler(char *message);
+void end_game_text(t_game *game);
 
 #endif

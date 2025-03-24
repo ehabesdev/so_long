@@ -3,7 +3,8 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 
 SRCS = src/game.c src/map_handling.c src/map_reading.c \
-	src/map_validation.c src/map_utils.c src/graphics.c
+	src/map_validation.c src/map_utils.c src/graphics.c \
+	src/map_checks.c
 
 OBJS = $(SRCS:.c=.o)
 INCLUDES = include/so_long.h
@@ -46,7 +47,6 @@ fclean: clean
 	rm -f $(NAME)
 	make fclean -C libs/libft
 	make fclean -C libs/ft_printf
-	make fclean -C libs/minilibx
 
 re: fclean all
 

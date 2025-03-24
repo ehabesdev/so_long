@@ -46,7 +46,7 @@ int load_images(t_game *game)
         return (0);
     if (!load_single_image(game, &game->collectible, "assets/collectible.xpm"))
         return (0);
-    if (!load_single_image(game, &game->exit, "assets/gate.xpm"))
+    if (!load_single_image(game, &game->exit, "assets/exit.xpm"))
         return (0);
     return (1);
 }
@@ -79,11 +79,4 @@ int draw_map(t_game *game)
         y++;
     }
     return (1);
-}
-
-int render_frame(t_game *game)
-{
-  //Şimdilik boş
-  (void)game;
-  return (0);
 }

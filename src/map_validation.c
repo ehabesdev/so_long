@@ -87,6 +87,6 @@ void    free_map(t_map *map)
                 free(map->map[i]);
         }
         free(map->map);
-        map->map = NULL; // ÖNEMLİ: dangling pointer'ı engelle
+        map->map = NULL;
     }
 }

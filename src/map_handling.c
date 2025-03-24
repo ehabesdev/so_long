@@ -85,9 +85,3 @@ int map_check(t_map *map, char *map_path)
         return(0);
     return (1);
 }
-
-int check_valid_path(t_map *map)
-{
-    (void)map;
-    return (1);
-}
