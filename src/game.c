@@ -32,7 +32,7 @@ static int handle_movement(t_game *game, int new_x, int new_y)
     game->player_x = new_x;
     game->player_y = new_y;
     game->moves += 1;
-    ft_printf("Hamle: %u\n", game->moves);
+    ft_printf("moves: %u\n", game->moves);
     if (game->map.map[new_y][new_x] == 'C')
         game->map.collectibles--;
     if (game->map.collectibles == 0 && game->map.map[new_y][new_x] == 'E')
