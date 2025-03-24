@@ -1,6 +1,5 @@
 #include "../include/so_long.h"
 
-// Yardımcı fonksiyon prototipleri
 static char **allocate_memory(t_map *map);
 static int  read_lines(int fd, t_map *map);
 static int  reopen_and_copy(t_map *map, int fd);
@@ -30,9 +29,9 @@ static int read_lines(int fd, t_map *map)
             map->width = ft_strlen(line);
         if (!process_single_line(map, &line, &row))
             return (0);
-        line = get_next_line(fd); // Sonraki satırı doğrudan 'line'a ata
+        line = get_next_line(fd);
     }
-    if (line != NULL) // Gereksiz, dongu zaten line == NULL olunca bitiyor.
+    if (line != NULL)
         free(line);
     if (row == 0)
     {
@@ -98,14 +97,13 @@ static int reopen_and_copy(t_map *map, int fd)
         error_handler("Error\nReopening map file failed");
         return (0);
     }
-
     row = 0;
     line = get_next_line(fd);
     while (line != NULL)
     {
         ft_memcpy(map->map[row], line, map->width);
         free(line);
-        line = NULL; // "Dangling pointer"ı engelle
+        line = NULL;
         row++;
         line = get_next_line(fd);
     }
