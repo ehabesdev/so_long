@@ -8,10 +8,8 @@ int init_graphics(t_game *game)
         error_handler("Error\nFailed to initialize MiniLibX.");
         return (0);
     }
-
     int window_width;
     int window_height;
-
     window_width = game->map.width * TILE_SIZE;
     window_height = game->map.height * TILE_SIZE;
     game->win = mlx_new_window(game->mlx, window_width, window_height, "So Long");
@@ -62,10 +60,7 @@ int draw_map(t_game *game)
         x = 0;
         while (x < game->map.width)
         {
-            // Önce zemini çiz
             mlx_put_image_to_window(game->mlx, game->win, game->floor.img, x * TILE_SIZE, y * TILE_SIZE);
-
-            // Sonra harita elemanlarını çiz (duvar, oyuncu, vb.)
             if (game->map.map[y][x] == '1')
                 mlx_put_image_to_window(game->mlx, game->win, game->wall.img, x * TILE_SIZE, y * TILE_SIZE);
             else if (game->map.map[y][x] == 'P')
