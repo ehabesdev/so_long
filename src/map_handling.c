@@ -1,8 +1,5 @@
 #include "../include/so_long.h"
 
-static int open_and_check_map(t_map *map, char *map_path, int *fd);
-
-// YARDIMCI FONKSİYON: Haritadaki P, E, C sayılarını kontrol eder.
 static int check_map_elements(t_map *map)
 {
     if (map->player_count != 1)
@@ -23,17 +20,15 @@ static int check_map_elements(t_map *map)
     return (1);
 }
 
-// Yardımcı fonksiyon: Dosyayı açar ve ilk kontrolleri yapar
 static int open_and_check_map(t_map *map, char *map_path, int *fd)
 {
-    map->map = NULL; // ÖNEMLİ: NULL'a eşitle, free_map güvenli çalışsın.
+    map->map = NULL;
     map->collectibles = 0;
     map->exit_count = 0;
     map->player_count = 0;
     map->width = 0;
     map->height = 0;
-    map->path = map_path; // Haritanın yolunu kaydet
-
+    map->path = map_path;
     *fd = open(map_path, O_RDONLY);
     if (*fd == -1)
     {
@@ -43,7 +38,8 @@ static int open_and_check_map(t_map *map, char *map_path, int *fd)
     return (1);
 }
 
-static int perform_map_checks(t_map *map, int fd) {
+static int perform_map_checks(t_map *map, int fd)
+{
     close(fd);
 
     if (!check_map_walls(map))
@@ -52,35 +48,26 @@ static int perform_map_checks(t_map *map, int fd) {
         free_map(map);
         return (0);
     }
-
     if (!check_map_elements(map))
     {
         free_map(map);
         return (0);
     }
-
-    // Yol kontrol  (check_valid_path)
-
     return (1);
 }
 
 int map_check(t_map *map, char *map_path)
 {
     int fd;
-
-    // Dosyayı aç ve temel kontrolleri yap
+    
     if (!open_and_check_map(map, map_path, &fd))
         return (0);
-
-    // Haritayı oku
     if (!read_map(fd, map))
     {
         close(fd);
         free_map(map);
         return (0);
     }
-
-     //Duvar,P,E,C kontrolleri.
     if(!perform_map_checks(map, fd))
         return(0);
     return (1);
