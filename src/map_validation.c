@@ -58,7 +58,6 @@ static int check_left_right_walls(t_map *map)
 
 int check_valid_path(t_map *map)
 {
-    //Daha sonra detaylandırılacak.
     if (map->collectibles < 1)
     {
         error_handler("Error\nThere must be at least one object on the map.");
@@ -79,12 +78,16 @@ int check_valid_path(t_map *map)
 
 void    free_map(t_map *map)
 {
+    int i;
+
+    i = 0;
     if (map && map->map)
     {
-        for (int i = 0; i < map->height; i++)
+        while ( i < map->height)
         {
             if (map->map[i])
                 free(map->map[i]);
+            i++;
         }
         free(map->map);
         map->map = NULL;
