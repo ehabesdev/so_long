@@ -2,13 +2,16 @@
 
 static void find_player_start(t_game *game)
 {
-    int x = 0;
-    int y = 0;
+    int x;
+    int y;
 
+    x = 0;
+    y = 0;
     while (y < game->map.height)
     {
         x = 0;
-        while (x < game->map.width) {
+        while (x < game->map.width)
+        {
             if (game->map.map[y][x] == 'P')
             {
                 game->player_x = x;
