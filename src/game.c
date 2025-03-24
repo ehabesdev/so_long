@@ -1,6 +1,5 @@
 #include "../include/so_long.h"
 
-// Yardımcı fonksiyon: Başlangıç konumunu bulur.
 static void find_player_start(t_game *game)
 {
     int x = 0;
@@ -22,26 +21,25 @@ static void find_player_start(t_game *game)
     }
 }
 
-// Yardımcı fonksiyon: Oyuncuyu hareket ettir, objeleri topla/çıkış kontrolü yap
 static int handle_movement(t_game *game, int new_x, int new_y)
 {
     if (!is_valid_move(&game->map, new_x, new_y))
-        return (0); // Hareket geçersiz
-    game->map.map[game->player_y][game->player_x] = '0'; // Eski konumu temizle
-    game->player_x = new_x; // Yeni konuma taşı
+        return (0);
+    game->map.map[game->player_y][game->player_x] = '0';
+    game->player_x = new_x;
     game->player_y = new_y;
-    game->moves += 1; // Hamle sayısını artır
+    game->moves += 1;
     ft_printf("Hamle: %u\n", game->moves);
     if (game->map.map[new_y][new_x] == 'C')
         game->map.collectibles--;
     if (game->map.collectibles == 0 && game->map.map[new_y][new_x] == 'E')
     {
         end_game_text(game);
-        exit_game(game);  // Temiz çıkış. exit(0) yaptığı için return'e gerek yok
+        exit_game(game);
     }
-    game->map.map[game->player_y][game->player_x] = 'P'; // Oyuncunun yeni konumu
-    draw_map(game); // Ekranı güncelle
-    return (1); // Hareket başarılı
+    game->map.map[game->player_y][game->player_x] = 'P';
+    draw_map(game);
+    return (1);
 }
 
 int key_hook(int keycode, t_game *game)
@@ -71,7 +69,7 @@ int main(int argc, char **argv)
     }
     if (!map_check(&game.map, argv[1]))
         return (1);
-    find_player_start(&game); // Başlangıç konumunu bul
+    find_player_start(&game);
     if (!init_graphics(&game))
     {
         free_map(&game.map);
@@ -79,7 +77,6 @@ int main(int argc, char **argv)
     }
     if (!load_images(&game))
         exit_game(&game);
-
     draw_map(&game);
     mlx_key_hook(game.win, key_hook, &game);
     mlx_hook(game.win, 17, 0, exit_game, &game);
@@ -107,5 +104,5 @@ int exit_game(t_game *game)
     mlx_destroy_display(game->mlx);
     free(game->mlx);
   }
-  exit(0); // exit_game fonksiyonu, programı sonlandırdığı için return değerine gerek yok.
+  exit(0);
 }
