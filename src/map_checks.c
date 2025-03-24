@@ -2,14 +2,11 @@
 
 int is_valid_move(t_map *map, int new_x, int new_y)
 {
-    // Harita sınırları kontrolü
     if (new_x < 0 || new_x >= map->width || new_y < 0 || new_y >= map->height)
-        return (0); // Harita dışına çıkılamaz
-
-    // Duvar kontrolü
+        return (0);
     if (map->map[new_y][new_x] == '1')
-        return (0); // Duvara çarpılamaz
-    return (1); // Hareket geçerli
+        return (0);
+    return (1);
 }
 
 void error_handler(char *message)
