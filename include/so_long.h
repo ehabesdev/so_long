@@ -6,10 +6,10 @@
 #include <unistd.h>
 
 // 42 Kütüphaneleri
-#include "../libs/libft/libft.h"                // libft
-#include "../libs/ft_printf/libftprintf.h"        // ft_printf
-#include "../libs/get_next_line/get_next_line.h" // GNL
-#include "../libs/minilibx/mlx.h"    // MiniLibX
+#include "../libs/libft/libft.h"                    // libft
+#include "../libs/ft_printf/libftprintf.h"          // ft_printf
+#include "../libs/get_next_line/get_next_line.h"    // GNL
+#include "../libs/minilibx/mlx.h"                   // MiniLibX
 
 //Sabitler
 # define TILE_SIZE 64
@@ -38,8 +38,8 @@ typedef struct s_img
     void    *img;           // Resmin MiniLibX içindeki tanımlayıcısı (işaretçi)
     char    *addr;          // Resmin piksel verilerinin bellekteki başlangıç adresi
     int     bits_per_pixel; // Piksel başına bit sayısı (renk derinliği)
-    int     line_length;     // Bir satırın bayt cinsinden uzunluğu (satır genişliği)
-    int     endian;          // Byte sıralaması (endianness)
+    int     line_length;    // Bir satırın bayt cinsinden uzunluğu (satır genişliği)
+    int     endian;         // Byte sıralaması (endianness)
     int     width;          // Resmin genişliği (piksel cinsinden)
     int     height;         // Resmin yüksekliği (piksel cinsinden)
 } t_img;
