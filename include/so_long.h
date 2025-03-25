@@ -8,7 +8,7 @@
 // 42 Kütüphaneleri
 #include "../libs/libft/libft.h"                    // libft
 #include "../libs/ft_printf/libftprintf.h"          // ft_printf
-#include "../libs/get_next_line/get_next_line.h"    // GNL
+#include "../libs/get_next_line/get_next_line.h"    // gnl
 #include "../libs/minilibx/mlx.h"                   // MiniLibX
 
 //Sabitler
