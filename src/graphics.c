@@ -53,7 +53,8 @@ int	load_images(t_game *game)
 	return (1);
 }
 
-int	draw_map(t_game *game)
+
+int draw_map(t_game *game)
 {
 	int	y;
 	int	x;
