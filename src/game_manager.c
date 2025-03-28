@@ -1,24 +1,11 @@
 #include "../include/so_long.h"
 
-static int handle_movement(t_game *game, int new_x, int new_y)
+static void handle_destination_tile(t_game *game, char destination_char)
 {
-    char destination_char;
-    int  old_x = game->player_x;
-    int  old_y = game->player_y;
-
-    if (!is_valid_move(&game->map, new_x, new_y))
-        return (0);
-    destination_char = game->map.map[new_y][new_x];
-    if (!(game->map.map[old_y][old_x] == 'E' && game->map.collectibles > 0))
-        game->map.map[old_y][old_x] = '0';
-    game->player_x = new_x;
-    game->player_y = new_y;
-    game->moves += 1;
-    ft_printf("Moves: %u\n", game->moves);
     if (destination_char == 'C')
     {
         game->map.collectibles--;
-        game->map.map[new_y][new_x] = 'P';
+        game->map.map[game->player_y][game->player_x] = 'P';
     }
     else if (destination_char == 'E')
     {
@@ -29,7 +16,27 @@ static int handle_movement(t_game *game, int new_x, int new_y)
         }
     }
     else
-        game->map.map[new_y][new_x] = 'P';
+        game->map.map[game->player_y][game->player_x] = 'P';
+}
+
+static int handle_movement(t_game *game, int new_x, int new_y)
+{
+    char destination_char;
+    int  old_x;
+    int  old_y;
+
+    old_x = game->player_x;
+    old_y = game->player_y;
+    if (!is_valid_move(&game->map, new_x, new_y))
+        return (0);
+    destination_char = game->map.map[new_y][new_x];
+    if (!(game->map.map[old_y][old_x] == 'E' && game->map.collectibles > 0))
+        game->map.map[old_y][old_x] = '0';
+    game->player_x = new_x;
+    game->player_y = new_y;
+    game->moves += 1;
+    ft_printf("Moves: %u\n", game->moves);
+    handle_destination_tile(game, destination_char);
     draw_map(game);
     return (1);
 }
