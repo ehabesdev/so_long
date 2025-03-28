@@ -1,46 +1,35 @@
 #include "../include/so_long.h"
 
-static void find_player_start(t_game *game)
-{
-    int x;
-    int y;
-
-    x = 0;
-    y = 0;
-    while (y < game->map.height)
-    {
-        x = 0;
-        while (x < game->map.width)
-        {
-            if (game->map.map[y][x] == 'P')
-            {
-                game->player_x = x;
-                game->player_y = y;
-                return ;
-            }
-            x++;
-        }
-        y++;
-    }
-}
-
 static int handle_movement(t_game *game, int new_x, int new_y)
 {
+    char destination_char;
+    int  old_x = game->player_x;
+    int  old_y = game->player_y;
+
     if (!is_valid_move(&game->map, new_x, new_y))
         return (0);
-    game->map.map[game->player_y][game->player_x] = '0';
+    destination_char = game->map.map[new_y][new_x];
+    if (!(game->map.map[old_y][old_x] == 'E' && game->map.collectibles > 0))
+        game->map.map[old_y][old_x] = '0';
     game->player_x = new_x;
     game->player_y = new_y;
     game->moves += 1;
-    ft_printf("moves: %u\n", game->moves);
-    if (game->map.map[new_y][new_x] == 'C')
-        game->map.collectibles--;
-    if (game->map.collectibles == 0 && game->map.map[new_y][new_x] == 'E')
+    ft_printf("Moves: %u\n", game->moves);
+    if (destination_char == 'C')
     {
-        end_game_text(game);
-        exit_game(game);
+        game->map.collectibles--;
+        game->map.map[new_y][new_x] = 'P';
     }
-    game->map.map[game->player_y][game->player_x] = 'P';
+    else if (destination_char == 'E')
+    {
+        if (game->map.collectibles == 0)
+        {
+            end_game_text(game);
+            exit_game(game);
+        }
+    }
+    else
+        game->map.map[new_y][new_x] = 'P';
     draw_map(game);
     return (1);
 }
@@ -86,7 +75,6 @@ int main(int argc, char **argv)
     mlx_loop(game.mlx);
     return (0);
 }
-
 int exit_game(t_game *game)
 {
   if (game->win)
@@ -109,3 +97,4 @@ int exit_game(t_game *game)
   }
   exit(0);
 }
+

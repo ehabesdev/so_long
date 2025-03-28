@@ -49,6 +49,8 @@ int load_images(t_game *game)
     return (1);
 }
 
+// graphics.c
+
 int draw_map(t_game *game)
 {
     int y;
@@ -63,15 +65,14 @@ int draw_map(t_game *game)
             mlx_put_image_to_window(game->mlx, game->win, game->floor.img, x * TILE_SIZE, y * TILE_SIZE);
             if (game->map.map[y][x] == '1')
                 mlx_put_image_to_window(game->mlx, game->win, game->wall.img, x * TILE_SIZE, y * TILE_SIZE);
-            else if (game->map.map[y][x] == 'P')
-                mlx_put_image_to_window(game->mlx, game->win, game->player.img, x * TILE_SIZE, y * TILE_SIZE);
             else if (game->map.map[y][x] == 'C')
                 mlx_put_image_to_window(game->mlx, game->win, game->collectible.img, x * TILE_SIZE, y * TILE_SIZE);
             else if (game->map.map[y][x] == 'E')
-                mlx_put_image_to_window(game->mlx, game->win, game->exit.img, x * TILE_SIZE, y * TILE_SIZE);
+                mlx_put_image_to_window(game->mlx, game->win, game->exit.img,  x * TILE_SIZE, y * TILE_SIZE);
             x++;
         }
         y++;
     }
+    mlx_put_image_to_window(game->mlx, game->win, game->player.img, game->player_x * TILE_SIZE, game->player_y * TILE_SIZE);
     return (1);
 }

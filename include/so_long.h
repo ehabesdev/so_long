@@ -12,7 +12,7 @@
 #include "../libs/minilibx/mlx.h"                   // MiniLibX
 
 //Sabitler
-# define TILE_SIZE 64
+# define TILE_SIZE 32
 
 // -keycodelar-
 #define KEY_ESC 0xff1b
@@ -53,41 +53,44 @@ typedef struct s_game {
     t_img       floor;         // Zemin görseli
     t_img       collectible;   // Toplanabilir öğe görseli
     t_img       exit;          // Çıkış görseli
-    int         player_x;      // Oyuncunun x koordinatı (kare cinsinden)
-    int         player_y;      // Oyuncunun y koordinatı (kare cinsinden)
+    int         exit_x;        // Çıkışın x kordinatı (kare cinsinden)
+    int         exit_y;        // Çıkışın y kordinatı (kare cinsinden)
+    int         player_x;      // Oyuncunun x kordinatı (kare cinsinden)
+    int         player_y;      // Oyuncunun y kordinatı (kare cinsinden)
     int         moves;         // Oyuncunun hareketi (kare cinsinden)
 }   t_game;
 
 // Fonksiyon prototipleri
 
-// map_handling.c
+// map_handling.c -> 4/5
 int  map_check(t_map *map, char *map_path);
 
-// map_reading.c
+// map_reading.c -> full
 int  read_map(int fd, t_map *map);
 
-// map_validation.c
+// map_validation.c -> full
 int  check_map_walls(t_map *map);
 void free_map(t_map *map);
 int  check_valid_path(t_map *map);
 
-// map_utils.c
+// map_utils.c -> 2/5
 int is_valid_char(char c);
 int process_line(t_map *map, char *line);
 
-// game.c
+// game_manager.c -> full
 int key_hook(int keycode, t_game *game);
 int exit_game(t_game *game);
 int move_player(t_game *game, int new_x, int new_y);
 
-// graphics.c
+// graphics.c -> full
 int  init_graphics(t_game *game);
 int  load_images(t_game *game);
 int  draw_map(t_game *game);
 
-//map_checks.c
+//map_checks.c -> 4/5
 int is_valid_move(t_map *map, int new_x, int new_y);
 void error_handler(char *message);
 void end_game_text(t_game *game);
+void find_player_start(t_game *game);
 
 #endif
