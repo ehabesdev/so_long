@@ -86,6 +86,7 @@ int move_player(t_game *game, int new_x, int new_y);
 int  init_graphics(t_game *game);
 int  load_images(t_game *game);
 int  draw_map(t_game *game);
+int render_frame(t_game *game);
 
 //map_checks.c -> 4/5
 int is_valid_move(t_map *map, int new_x, int new_y);
