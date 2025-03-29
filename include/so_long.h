@@ -86,7 +86,7 @@ int		check_valid_path(t_map *map);	// Check P, E, C counts validity.
 void	free_map(t_map *map);	// Free allocated map memory.
 
 // output.c (or messaging / error)
-void	error_handler(char *message);	// Print error message (rename?).
+void	error_handler(char *message);	// Print error message.
 void	end_game_text(t_game *game);	// Print game completion message.
 
 // game_manager.c (or gameplay)
