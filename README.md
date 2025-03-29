@@ -136,7 +136,7 @@ so_long/
 │   ├── collectible.xpm
 │   ├── exit.xpm
 │   └── floor.xpm
-├── include/        # Projeye özel header dosyası
+├── include/        # Header dosyası
 │   └── so_long.h
 ├── libs/           # Kullanılan harici ve kişisel kütüphaneler
 │   ├── ft_printf/
