@@ -126,4 +126,41 @@ Derleme başarılı olduktan sonra, oyunu çalıştırmak için yürütülebilir
 
 ---
 
+## 📁 Proje Yapısı
+
+```text
+so_long/
+├── assets/         # Görsel dosyaları (.xpm)
+│   ├── player.xpm
+│   ├── wall.xpm
+│   ├── collectible.xpm
+│   ├── exit.xpm
+│   └── floor.xpm
+├── include/        # Projeye özel header dosyası
+│   └── so_long.h
+├── libs/           # Kullanılan harici ve kişisel kütüphaneler
+│   ├── ft_printf/
+│   ├── get_next_line/
+│   ├── libft/
+│   └── minilibx/
+├── maps/           # Harita dosyaları (.ber)
+│   └── map.ber
+│   └── big_map.ber
+│   └── miss_map.ber
+│   └── ...
+├── src/            # Projenin ana kaynak kod dosyaları
+│   ├── main.c
+│   ├── graphics.c
+│   ├── game_manager.c
+│   ├── map_read.c
+│   ├── map_validate.c
+│   ├── map_validate_structure.c
+│   ├── output.c
+│   └── setup.c
+├── .gitignore      # (Opsiyonel: Git'in takip etmeyeceği dosyalar)
+├── Makefile        # Derleme ve temizleme script'i
+└── README.md       # Bu dosya!
+```
+
+---
 *So Long, and Thanks for All the Fish!* 🐬
