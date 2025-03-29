@@ -1,4 +1,4 @@
-# 👾 So Long - 42 Projesi 🚀
+# 👾 So Long 🚀
 
 [![42 Intra Badge](https://img.shields.io/badge/42_Okulu-Projesi-00babc?style=for-the-badge&logo=42)](https://www.42kocaeli.com.tr) [![Language](https://img.shields.io/badge/Dil-C-blue?style=for-the-badge&logo=c)](https://en.wikipedia.org/wiki/C_(programming_language))
 
