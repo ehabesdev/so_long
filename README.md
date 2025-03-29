@@ -148,7 +148,7 @@ so_long/
 │   └── big_map.ber
 │   └── miss_map.ber
 │   └── ...
-├── src/            # Projenin ana kaynak kod dosyaları
+├── src/            # Kaynak kod dosyaları
 │   ├── main.c
 │   ├── graphics.c
 │   ├── game_manager.c
@@ -157,7 +157,6 @@ so_long/
 │   ├── map_validate_structure.c
 │   ├── output.c
 │   └── setup.c
-├── .gitignore      # (Opsiyonel: Git'in takip etmeyeceği dosyalar)
 ├── Makefile        # Derleme ve temizleme script'i
 └── README.md       # Bu dosya!
 ```
