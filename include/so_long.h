@@ -24,11 +24,11 @@
 
 # define TILE_SIZE 32   // Size of one tile in pixels
 
-# define KEY_ESC 0xff1b                             // Escape key
-# define KEY_W 0x77                                 // W key
-# define KEY_A 0x61                                 // A key
-# define KEY_S 0x73                                 // S key
-# define KEY_D 0x64                                 // D key
+# define KEY_ESC 0xff1b
+# define KEY_W 0x77
+# define KEY_A 0x61
+# define KEY_S 0x73
+# define KEY_D 0x64
 
 // Structure for map data
 typedef struct s_map
