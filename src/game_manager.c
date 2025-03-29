@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   game_manager.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ehabes <ehabes@student.42kocaeli.com.tr    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/29 20:24:01 by ehabes            #+#    #+#             */
+/*   Updated: 2025/03/29 20:24:03 by ehabes           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/so_long.h"
 
 static void	handle_destination_tile(t_game *game, char destination_char)
@@ -56,53 +68,35 @@ int	key_hook(int keycode, t_game *game)
 	return (0);
 }
 
-int	main(int argc, char **argv)
+int	is_valid_move(t_map *map, int new_x, int new_y)
 {
-	t_game	game;
-
-	game.moves = 0;
-	if (argc != 2)
-	{
-		error_handler("Usage: ./so_long <map_file.ber>");
-		return (1);
-	}
-	if (!map_check(&game.map, argv[1]))
-		return (1);
-	find_player_start(&game);
-	if (!init_graphics(&game))
-	{
-		free_map(&game.map);
-		return (1);
-	}
-	if (!load_images(&game))
-		exit_game(&game);
-	draw_map(&game);
-	mlx_key_hook(game.win, key_hook, &game);
-	mlx_hook(game.win, 17, 0, exit_game, &game);
-	mlx_expose_hook(game.win, render_frame, &game);
-	mlx_loop(game.mlx);
-	return (0);
+	if (new_x < 0 || new_x >= map->width || new_y < 0 || new_y >= map->height)
+		return (0);
+	if (map->map[new_y][new_x] == '1')
+		return (0);
+	return (1);
 }
 
-int	exit_game(t_game *game)
+void	find_player_start(t_game *game)
 {
-	if (game->win)
-		mlx_destroy_window(game->mlx, game->win);
-	if (game->wall.img)
-		mlx_destroy_image(game->mlx, game->wall.img);
-	if (game->floor.img)
-		mlx_destroy_image(game->mlx, game->floor.img);
-	if (game->player.img)
-		mlx_destroy_image(game->mlx, game->player.img);
-	if (game->collectible.img)
-		mlx_destroy_image(game->mlx, game->collectible.img);
-	if (game->exit.img)
-		mlx_destroy_image(game->mlx, game->exit.img);
-	free_map(&game->map);
-	if (game->mlx)
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	while (y < game->map.height)
 	{
-		mlx_destroy_display(game->mlx);
-		free(game->mlx);
+		x = 0;
+		while (x < game->map.width)
+		{
+			if (game->map.map[y][x] == 'P')
+			{
+				game->player_x = x;
+				game->player_y = y;
+				return ;
+			}
+			x++;
+		}
+		y++;
 	}
-	exit(0);
 }

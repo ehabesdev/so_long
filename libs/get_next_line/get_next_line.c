@@ -17,6 +17,13 @@ char	*get_next_line(int fd)
 	static char	*buffer;
 	char		*line;
 
+	if (fd == -1)
+	{
+		if (buffer)
+			free(buffer);
+		buffer = NULL;
+		return (0);
+	}
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (0);
 	buffer = read_function(fd, buffer);

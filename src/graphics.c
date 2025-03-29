@@ -1,60 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   graphics.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ehabes <ehabes@student.42kocaeli.com.tr    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/29 20:24:11 by ehabes            #+#    #+#             */
+/*   Updated: 2025/03/29 20:24:13 by ehabes           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/so_long.h"
 
-int	init_graphics(t_game *game)
-{
-	int	window_width;
-	int	window_height;
-
-	game->mlx = mlx_init();
-	if (game->mlx == NULL)
-	{
-		error_handler("Error\nFailed to initialize MiniLibX.");
-		return (0);
-	}
-	window_width = game->map.width * TILE_SIZE;
-	window_height = game->map.height * TILE_SIZE;
-	game->win = mlx_new_window(game->mlx, window_width, \
-		window_height, "So Long");
-	if (game->win == NULL)
-	{
-		free(game->mlx);
-		error_handler("Error\nFailed to create window.");
-		return (0);
-	}
-	return (1);
-}
-
-static int	load_single_image(t_game *game, t_img *img, char *path)
-{
-	img->img = mlx_xpm_file_to_image(game->mlx, path, \
-		&img->width, &img->height);
-	if (!img->img)
-	{
-		error_handler("Error\nFailed to load image");
-		return (0);
-	}
-	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel, \
-		&img->line_length, &img->endian);
-	return (1);
-}
-
-int	load_images(t_game *game)
-{
-	if (!load_single_image(game, &game->wall, "assets/wall.xpm"))
-		return (0);
-	if (!load_single_image(game, &game->floor, "assets/floor.xpm"))
-		return (0);
-	if (!load_single_image(game, &game->player, "assets/player.xpm"))
-		return (0);
-	if (!load_single_image(game, &game->collectible, "assets/collectible.xpm"))
-		return (0);
-	if (!load_single_image(game, &game->exit, "assets/exit.xpm"))
-		return (0);
-	return (1);
-}
-
-
-int draw_map(t_game *game)
+int	draw_map(t_game *game)
 {
 	int	y;
 	int	x;
@@ -87,4 +45,27 @@ int	render_frame(t_game *game)
 {
 	draw_map(game);
 	return (0);
+}
+
+int	exit_game(t_game *game)
+{
+	if (game->win)
+		mlx_destroy_window(game->mlx, game->win);
+	if (game->wall.img)
+		mlx_destroy_image(game->mlx, game->wall.img);
+	if (game->floor.img)
+		mlx_destroy_image(game->mlx, game->floor.img);
+	if (game->player.img)
+		mlx_destroy_image(game->mlx, game->player.img);
+	if (game->collectible.img)
+		mlx_destroy_image(game->mlx, game->collectible.img);
+	if (game->exit.img)
+		mlx_destroy_image(game->mlx, game->exit.img);
+	free_map(&game->map);
+	if (game->mlx)
+	{
+		mlx_destroy_display(game->mlx);
+		free(game->mlx);
+	}
+	exit(0);
 }
