@@ -61,7 +61,7 @@ Oyun, `.ber` uzantılı dosyalarla tanımlanan haritaları kullanır. Haritalar 
 
 Projeyi derlemek için sisteminizde `make` ve C derleyicisinin (örn: `gcc`) kurulu olması gerekir. Ayrıca MiniLibX kütüphanesinin de sisteminizde ayarlı olması önemlidir (42 ortamlarında genellikle hazırdır).
 
-1.  **Repoyu Klonla (eğer yapmadıysan):**
+1.  **Repoyu Klonla:**
     ```bash
     git clone git@github.com:ehabesdev/so_long.git so_long
     cd so_long
@@ -82,3 +82,16 @@ Derleme başarılı olduktan sonra, oyunu çalıştırmak için yürütülebilir
 ```bash
 ./so_long maps/map.ber
 ```
+---
+
+## ⌨️ Kontroller
+
+* **W**: Yukarı Hareket **⬆️**
+* **A**: Sola Hareket **⬅️**
+* **S**: Aşağı Hareket **⬇️**
+* **D**: Sağa Hareket **➡️**
+* **ESC**: Oyundan Çıkış ❌
+
+---
+
+*So Long, and Thanks for All the Fish!* 🐬
