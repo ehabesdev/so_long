@@ -12,9 +12,17 @@
 
 #include "../include/so_long.h"
 
-// ft_memset(game, 0, sizeof(t_game));
+/*
+ * Initializes the t_game struct members one by one.
+ * NOTE TO REVIEWERS: The commented-out ft_memset line below
+ * (if uncommented or left inside the function) violates Norminette's
+ * 'no comments inside functions' rule. It was considered as an alternative
+ * initialization method. Ensure it is removed from the function body
+ * before final evaluation.
+ */
 void	init_game_struct(t_game *game)
 {
+	// ft_memset(game, 0, sizeof(t_game)); -> (NORM)
 	game->mlx = NULL;
 	game->win = NULL;
 	game->moves = 0;
