@@ -57,6 +57,38 @@ Oyun, `.ber` uzantılı dosyalarla tanımlanan haritaları kullanır. Haritalar 
 
 ---
 
+## 📚 Bu Projede Pekiştirilen Beceriler
+
+Bu proje, 42 müfredatı kapsamında aşağıdaki temel programlama ve problem çözme becerilerini pekiştirmeyi amaçlamaktadır:
+
+* **🖥️ Grafik Programlama (MiniLibX):**
+    * Pencere yönetimi (oluşturma, kapatma).
+    * Görsel (sprite) yükleme ve ekrana çizdirme (`.xpm` dosyaları).
+    * Klavye ve pencere olaylarını (event) yönetme (tuş basımları, pencere kapanması, yeniden çizim).
+* **📄 Dosya Okuma ve İşleme:**
+    * Harita (`.ber`) dosyalarını açma, satır satır okuma (`get_next_line`).
+    * Okunan veriyi yorumlayarak oyun haritasını oluşturma.
+* **🧠 Algoritma ve Mantık:**
+    * Harita doğrulama algoritmaları (duvar kontrolü, eleman sayısı ve türü kontrolü).
+    * Oyuncu hareket mantığı ve basit çarpışma (duvar) kontrolü.
+    * Oyun durumu yönetimi (toplanabilir sayımı, kazanma koşulu).
+* **💾 Bellek Yönetimi:**
+    * Dinamik bellek ayırma (`malloc`) ve serbest bırakma (`free`) (harita matrisi, MiniLibX nesneleri vb. için).
+    * Bellek sızıntılarını önleme (özellikle `exit_game` fonksiyonunda).
+* **🧩 Modüler Programlama:**
+    * Kodun farklı işlevlere göre (`src/` altındaki `.c` dosyaları) mantıksal olarak ayrılması.
+    * Header dosyaları (`.h`) ile fonksiyon prototiplerinin ve yapı tanımlarının düzenlenmesi.
+* **🔧 Hata Yönetimi:**
+    * Fonksiyon dönüş değerlerini kontrol etme (örn: `mlx_init`, `mlx_new_window`, dosya açma).
+    * Anlaşılır hata mesajları (`error_handler`) gösterme ve programı güvenli bir şekilde sonlandırma.
+* **⚙️ Derleme Süreci:**
+    * `Makefile` kullanarak projenin derlenmesi ve bağımlılıkların (Libft, MiniLibX vb.) yönetilmesi.
+* **📚 Kütüphane Kullanımı:**
+    * Kendi yazdığımız `Libft`, `ft_printf`, `get_next_line` gibi kütüphaneleri projeye entegre etme ve etkin kullanma.
+    * Harici (MiniLibX) bir kütüphanenin fonksiyonlarını anlama ve kullanma.
+
+---
+
 ## 🛠️ Kurulum ve Derleme
 
 Projeyi derlemek için sisteminizde `make` ve C derleyicisinin (örn: `gcc`) kurulu olması gerekir. Ayrıca MiniLibX kütüphanesinin de sisteminizde ayarlı olması önemlidir (42 ortamlarında genellikle hazırdır).
