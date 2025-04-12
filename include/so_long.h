@@ -6,7 +6,7 @@
 /*   By: ehabes <ehabes@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 20:23:15 by ehabes            #+#    #+#             */
-/*   Updated: 2025/03/29 20:23:18 by ehabes           ###   ########.fr       */
+/*   Updated: 2025/04/12 13:10:55 by ehabes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,8 @@ void	init_game_struct(t_game *game);	// Initialize t_game members.
 int		init_graphics(t_game *game);	// Initialize MLX and window.
 int		load_images(t_game *game);	// Load all XPM images.
 int		open_and_check_map(t_map *m, char *p, int *fd);	// Open map, init t_map.
+
+// validate_utils.c
+void	validate_map_file(char *argv);	// Validate map filename.
 
 #endif

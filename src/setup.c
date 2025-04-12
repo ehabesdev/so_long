@@ -6,23 +6,14 @@
 /*   By: ehabes <ehabes@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 20:24:43 by ehabes            #+#    #+#             */
-/*   Updated: 2025/03/29 20:32:23 by ehabes           ###   ########.fr       */
+/*   Updated: 2025/04/12 13:08:11 by ehabes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-/*
- * Initializes the t_game struct members one by one.
- * NOTE TO REVIEWERS: The commented-out ft_memset line below
- * (if uncommented or left inside the function) violates Norminette's
- * 'no comments inside functions' rule. It was considered as an alternative
- * initialization method. Ensure it is removed from the function body
- * before final evaluation.
- */
 void	init_game_struct(t_game *game)
 {
-	// ft_memset(game, 0, sizeof(t_game)); -> (NORM)
 	game->mlx = NULL;
 	game->win = NULL;
 	game->moves = 0;
@@ -114,6 +105,7 @@ int	open_and_check_map(t_map *map, char *map_path, int *fd)
 	map->width = 0;
 	map->height = 0;
 	map->path = map_path;
+	validate_map_file(map_path);
 	*fd = open(map_path, O_RDONLY);
 	if (*fd == -1)
 	{

@@ -6,7 +6,7 @@
 /*   By: ehabes <ehabes@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 20:24:17 by ehabes            #+#    #+#             */
-/*   Updated: 2025/03/29 20:24:18 by ehabes           ###   ########.fr       */
+/*   Updated: 2025/04/12 13:19:02 by ehabes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ int	main(int argc, char **argv)
 {
 	t_game	game;
 
-	init_game_struct(&game);
-	game.moves = 0;
 	if (argc != 2)
 	{
 		error_handler("Usage: ./so_long <map_file.ber>");
 		return (1);
 	}
+	init_game_struct(&game);
+	game.moves = 0;
 	if (!map_check(&game.map, argv[1]))
 		return (1);
 	find_player_start(&game);

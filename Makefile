@@ -4,7 +4,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 SRCS = src/main.c src/game_manager.c src/map_validate.c \
 	src/map_validate_structure.c src/output.c src/graphics.c \
-	src/setup.c src/map_read.c
+	src/setup.c src/map_read.c src/validate_utils.c
 
 OBJS = $(SRCS:.c=.o)
 INCLUDES = include/so_long.h

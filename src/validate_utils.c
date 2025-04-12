@@ -1,38 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   validate_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehabes <ehabes@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/13 13:19:23 by ehabes            #+#    #+#             */
-/*   Updated: 2025/04/12 13:12:21 by ehabes           ###   ########.fr       */
+/*   Created: 2025/04/12 12:45:55 by ehabes            #+#    #+#             */
+/*   Updated: 2025/04/12 13:24:06 by ehabes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/so_long.h"
 
-char	*ft_strrchr(const char *s, int c)
+void	validate_map_file(char *argv)
 {
-	char	*p;
-	int		i;
-	int		last;
+	int		len;
+	char	*filename;
 
-	p = (char *)s;
-	i = 0;
-	last = -1;
-	if ((unsigned char)c == 0)
-		return (p + ft_strlen(p));
-	while (s[i] != '\0')
-	{
-		if (s[i] == (unsigned char)c)
-		{
-			last = i;
-		}
-		i++;
-	}
-	if (last != -1)
-		return (p + last);
+	filename = ft_strrchr((const char *)argv, '/');
+	if (filename)
+		filename++;
 	else
-		return (0);
+		filename = argv;
+	len = ft_strlen(filename);
+	if (len <= 4 || ft_strncmp(filename + len - 4, ".ber", 4) != 0 \
+		|| ft_strncmp(filename, ".ber", 4) == 0)
+	{
+		error_handler("==Error==\nInvalid map file name");
+		exit(0);
+	}
 }
