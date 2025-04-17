@@ -6,7 +6,7 @@
 /*   By: ehabes <ehabes@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 20:24:28 by ehabes            #+#    #+#             */
-/*   Updated: 2025/03/29 20:24:29 by ehabes           ###   ########.fr       */
+/*   Updated: 2025/04/18 01:15:29 by ehabes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,27 +64,6 @@ static int	check_left_right_walls(t_map *map)
 			return (0);
 		}
 		i++;
-	}
-	return (1);
-}
-
-int	check_valid_path(t_map *map)
-{
-	if (map->collectibles < 1)
-	{
-		error_handler("==Error==\nThere must be at least \
-				one object on the map.");
-		return (0);
-	}
-	if (map->exit_count != 1)
-	{
-		error_handler("==Error==\nThere must be one exit on the map.");
-		return (0);
-	}
-	if (map->player_count != 1)
-	{
-		error_handler("==Error==\nThere must be one player on the map.");
-		return (0);
 	}
 	return (1);
 }

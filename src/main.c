@@ -6,7 +6,7 @@
 /*   By: ehabes <ehabes@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 20:24:17 by ehabes            #+#    #+#             */
-/*   Updated: 2025/04/12 13:19:02 by ehabes           ###   ########.fr       */
+/*   Updated: 2025/04/18 00:37:42 by ehabes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,16 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		error_handler("Usage: ./so_long <map_file.ber>");
+		error_handler("==error==\nUsage: ./so_long <map_file.ber>");
 		return (1);
 	}
 	init_game_struct(&game);
-	game.moves = 0;
-	if (!map_check(&game.map, argv[1]))
+	if (!perform_map_validation(&game, argv[1]))
+	{
+		free_map(&game.map);
 		return (1);
-	find_player_start(&game);
-	if (!init_graphics(&game))
+	}
+	if (!init_mlx(&game))
 	{
 		free_map(&game.map);
 		return (1);
@@ -34,9 +35,7 @@ int	main(int argc, char **argv)
 	if (!load_images(&game))
 		exit_game(&game);
 	draw_map(&game);
-	mlx_key_hook(game.win, key_hook, &game);
-	mlx_hook(game.win, 17, 0, exit_game, &game);
-	mlx_expose_hook(game.win, render_frame, &game);
+	setup_mlx_hooks(&game);
 	mlx_loop(game.mlx);
 	return (0);
 }

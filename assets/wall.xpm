@@ -136,7 +136,7 @@ static char *xpm_[] = {
 "s. c #91C972",
 "d. c #96C973",
 "f. c #91CA78",
-"g. c None",
+"g. c #A5CD47",
 "h. c black",
 /* pixels */
 "g.g.g.g.g.g.g.g.g.g.g.: > ; = = = = > > g.g.g.g.g.g.g.g.g.g.g.g.",

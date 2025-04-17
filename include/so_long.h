@@ -6,7 +6,7 @@
 /*   By: ehabes <ehabes@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 20:23:15 by ehabes            #+#    #+#             */
-/*   Updated: 2025/04/12 13:10:55 by ehabes           ###   ########.fr       */
+/*   Updated: 2025/04/18 01:15:42 by ehabes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,13 @@
 # include <fcntl.h>
 # include <unistd.h>
 
-# include "../libs/libft/libft.h"                   // libft library
-# include "../libs/ft_printf/libftprintf.h"          // ft_printf library
-# include "../libs/get_next_line/get_next_line.h"    // get_next_line library
-# include "../libs/minilibx/mlx.h"                   // MiniLibX library
+# include "../libs/libft/libft.h"
+# include "../libs/ft_printf/libftprintf.h"
+# include "../libs/get_next_line/get_next_line.h"
+# include "../libs/minilibx/mlx.h"
 
-# define TILE_SIZE 32   // Size of one tile in pixels
+# define TILE_SIZE 32
+# define INT_MAX 2147483647
 
 # define KEY_ESC 0xff1b
 # define KEY_W 0x77
@@ -30,82 +31,80 @@
 # define KEY_S 0x73
 # define KEY_D 0x64
 
-// Structure for map data
 typedef struct s_map
 {
-	char	**map;	// 2D array holding the map layout
-	int		width;	// Map width (in tiles)
-	int		height;	// Map height (in tiles)
-	int		collectibles;	// Number of collectibles ('C')
-	int		exit_count;	// Number of exits ('E') (should be 1)
-	int		player_count;	// Number of players ('P') (should be 1)
-	char	*path;	// Path to the map file
+	char	**map;
+	int		width;
+	int		height;
+	int		collectibles;
+	int		exit_count;
+	int		player_count;
+	char	*path;
 }	t_map;
 
-// Structure for image data
 typedef struct s_img
 {
-	void	*img;	// Pointer to the image instance (from mlx)
-	char	*addr;	// Pointer to the image pixel data
-	int		bits_per_pixel;	// Color depth
-	int		line_length;	// Size of one line in bytes
-	int		endian;	// Endianness (byte order)
-	int		width;	// Image width in pixels
-	int		height;	// Image height in pixels
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	int		width;
+	int		height;
 }	t_img;
 
-// Main game structure
 typedef struct s_game
 {
-	void	*mlx;	// MLX connection pointer
-	void	*win;	// Window pointer
-	t_map	map;	// Map data structure
-	t_img	player;	// Player image
-	t_img	wall;	// Wall image
-	t_img	floor;	// Floor image
-	t_img	collectible;	// Collectible image
-	t_img	exit;	// Exit image
-	int		exit_x;	// Exit X coordinate (tile-based)
-	int		exit_y;	// Exit Y coordinate (tile-based)
-	int		player_x;	// Player's X coordinate (tile-based)
-	int		player_y;	// Player's Y coordinate (tile-based)
-	int		moves;	// Number of player moves
+	void	*mlx;
+	void	*win;
+	t_map	map;
+	t_img	player;
+	t_img	wall;
+	t_img	floor;
+	t_img	collectible;
+	t_img	exit;
+	int		exit_x;
+	int		player_x;
+	int		player_y;
+	int		moves;
 }	t_game;
 
-// map_validate.c
-int		map_check(t_map *map, char *map_path); // Check map file and contents.
-int		is_valid_char(char c);	// Check if char is valid for map.
-int		process_line(t_map *map, char *line);	// Process a single map line.
+typedef struct s_point
+{
+	int	w;
+	int	h;
+}	t_point;
 
-// map_read.c
-int		read_map(int fd, t_map *map);	// Read map from fd into struct.
+int		map_check(t_map *map, char *map_path);
+int		is_valid_char(char c);
+int		process_line(t_map *map, char *line);
 
-// map_validate_structure.c
-int		check_map_walls(t_map *map);	// Check if map is enclosed.
-int		check_valid_path(t_map *map);	// Check P, E, C counts validity.
-void	free_map(t_map *map);	// Free allocated map memory.
+int		read_map(int fd, t_map *map);
 
-// output.c (or messaging / error)
-void	error_handler(char *message);	// Print error message.
-void	end_game_text(t_game *game);	// Print game completion message.
+int		check_map_walls(t_map *map);
+void	free_map(t_map *map);
 
-// game_manager.c (or gameplay)
-int		key_hook(int keycode, t_game *game);	// Handle keyboard events.
-int		is_valid_move(t_map *map, int x, int y);	// Check if move is valid.
-void	find_player_start(t_game *game);	// Find player start position.
+void	error_handler(char *message);
+void	end_game_text(t_game *game);
 
-// graphics.c
-int		draw_map(t_game *game);	// Draw map and elements.
-int		render_frame(t_game *game);	// Handle window redraw events.
-int		exit_game(t_game *game);	// Clean up and exit game.
+int		key_hook(int keycode, t_game *game);
+int		is_valid_move(t_map *map, int x, int y);
+void	find_player_start(t_game *game);
 
-// setup.c
-void	init_game_struct(t_game *game);	// Initialize t_game members.
-int		init_graphics(t_game *game);	// Initialize MLX and window.
-int		load_images(t_game *game);	// Load all XPM images.
-int		open_and_check_map(t_map *m, char *p, int *fd);	// Open map, init t_map.
+int		draw_map(t_game *game);
+int		render_frame(t_game *game);
+int		exit_game(t_game *game);
 
-// validate_utils.c
-void	validate_map_file(char *argv);	// Validate map filename.
+void	init_game_struct(t_game *game);
+int		init_mlx(t_game *game);
+int		load_images(t_game *game);
+int		open_and_check_map(t_map *m, char *p, int *fd);
+
+void	validate_map_file(char *argv);
+
+int		validate_map_path(t_game *game);
+
+int		perform_map_validation(t_game *game, char *map_path);
+void	setup_mlx_hooks(t_game *game);
 
 #endif

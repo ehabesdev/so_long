@@ -6,7 +6,7 @@
 /*   By: ehabes <ehabes@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 20:24:22 by ehabes            #+#    #+#             */
-/*   Updated: 2025/03/29 20:24:23 by ehabes           ###   ########.fr       */
+/*   Updated: 2025/04/18 01:36:28 by ehabes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int	read_lines(int fd, t_map *map)
 		free(line);
 	if (row == 0)
 	{
-		error_handler("Empty file!");
+		error_handler("==error==\nEmpty file!");
 		return (0);
 	}
 	map->height = row;
@@ -56,8 +56,6 @@ static int	read_lines(int fd, t_map *map)
 
 static int	process_single_line(t_map *map, char **line, int *row)
 {
-	if (*row == 0)
-		map->width = ft_strlen(*line);
 	if (!process_line(map, *line))
 	{
 		free(*line);

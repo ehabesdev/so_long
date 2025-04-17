@@ -6,7 +6,7 @@
 /*   By: ehabes <ehabes@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 20:24:43 by ehabes            #+#    #+#             */
-/*   Updated: 2025/04/12 13:08:11 by ehabes           ###   ########.fr       */
+/*   Updated: 2025/04/16 20:39:08 by ehabes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,9 @@ void	init_game_struct(t_game *game)
 	game->player_x = -1;
 	game->player_y = -1;
 	game->exit_x = -1;
-	game->exit_y = -1;
 }
 
-int	init_graphics(t_game *game)
+int	init_mlx(t_game *game)
 {
 	int	window_width;
 	int	window_height;
@@ -98,12 +97,6 @@ int	load_images(t_game *game)
 
 int	open_and_check_map(t_map *map, char *map_path, int *fd)
 {
-	map->map = NULL;
-	map->collectibles = 0;
-	map->exit_count = 0;
-	map->player_count = 0;
-	map->width = 0;
-	map->height = 0;
 	map->path = map_path;
 	validate_map_file(map_path);
 	*fd = open(map_path, O_RDONLY);

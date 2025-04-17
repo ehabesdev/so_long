@@ -47,7 +47,7 @@ static int	handle_movement(t_game *game, int new_x, int new_y)
 	game->player_x = new_x;
 	game->player_y = new_y;
 	game->moves += 1;
-	ft_printf("Moves: %u\n", game->moves);
+	ft_printf("\rMoves: %u", game->moves);
 	handle_destination_tile(game, destination_char);
 	draw_map(game);
 	return (1);
