@@ -157,6 +157,8 @@ so_long/
 │   ├── map_validate_structure.c
 │   ├── output.c
 │   ├── setup.c
+│   ├── game_init.c
+│   ├── map_path_validate.c
 │   └── validate_map_file.c
 ├── Makefile        # Derleme ve temizleme script'i
 └── README.md       # Bu dosya!
