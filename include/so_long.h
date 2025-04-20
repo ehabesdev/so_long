@@ -6,7 +6,7 @@
 /*   By: ehabes <ehabes@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 20:23:15 by ehabes            #+#    #+#             */
-/*   Updated: 2025/04/18 01:15:42 by ehabes           ###   ########.fr       */
+/*   Updated: 2025/04/20 22:40:34 by ehabes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,6 @@ typedef struct s_map
 typedef struct s_img
 {
 	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
 	int		width;
 	int		height;
 }	t_img;

@@ -6,7 +6,7 @@
 /*   By: ehabes <ehabes@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 20:24:43 by ehabes            #+#    #+#             */
-/*   Updated: 2025/04/16 20:39:08 by ehabes           ###   ########.fr       */
+/*   Updated: 2025/04/20 22:38:03 by ehabes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,15 +66,6 @@ static int	load_single_image(t_game *game, t_img *img, char *path)
 	if (!img->img)
 	{
 		ft_printf("==Error==\nFailed to load image: %s\n", path);
-		return (0);
-	}
-	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel,
-			&img->line_length, &img->endian);
-	if (!img->addr)
-	{
-		ft_printf("==Error==\nFailed to get image data address: %s\n", path);
-		mlx_destroy_image(game->mlx, img->img);
-		img->img = NULL;
 		return (0);
 	}
 	return (1);
